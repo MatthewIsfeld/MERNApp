@@ -9,6 +9,9 @@ const userRouter = require('./routes/userRoutes.js');
 //create express app
 const app = express();
 
+//use express.json() to allow for our backend to take json data in requests
+app.use(express.json());
+
 //connect to the database
 mongoose.connect(process.env.MONGO_URI)
     .then(() => {
