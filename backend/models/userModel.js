@@ -56,5 +56,30 @@ userSchema.statics.signup = async function(email, password) {
     return user;
 }
 
+//create a static login function
+userSchema.statics.login = async function(email, password) {
+    //first check if all fields exist
+    if (!email || !password) {
+        throw Error("All fields must be filled out!");
+    }
+
+    //if the user has entered something for the fields check to see if a user exists that has this email (there should be no duplicate users since we check for that when signing up)
+    const user = await this.findOne({email});
+    //if there is no user send an error
+    if (!user) {
+        throw Error("A user with this email does not exist");
+    }
+
+    //if a user does exist we check to see if the specified password was correct
+    const passwordCompare = await bcrypt.compare(password, user.password);
+
+    //if we get false from bcrpy.compare it means the password does not match, so throw an error and do not log the user in
+    if (!passwordCompare) {
+        throw Error ("Incorrect Password!");
+    }
+
+    return user;
+}
+
 //export our schema as a model so we can use it elsewhere
 module.exports = mongoose.model('User', userSchema);

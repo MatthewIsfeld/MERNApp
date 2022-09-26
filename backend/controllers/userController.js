@@ -10,7 +10,19 @@ const createToken = (email, _id) => {
 
 //login function
 const loginUser = async (req, res) => {
-    res.status(200).json({message: "This is the /login route"});
+    //get the email and password from the user's request
+    const {email, password} = req.body;
+
+    try {
+        const user = await User.login(email, password);
+
+        //if we are successful in logging in create a token and send it back to the user
+        const token = createToken(user.email, user._id);
+        res.status(200).json({ email, token });  
+    } catch (error) {
+        //if there is an error send the error back to the user
+        res.status(400).json({error: error.message});          
+    }
 }
 
 const signupUser = async (req, res) => {
