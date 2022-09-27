@@ -1,9 +1,11 @@
 import {useState} from 'react';
+import {UseUserContext} from '../hooks/useUserContext.js';
 
 const Signup = () => {
     //create state hooks to manage the input to our forms
     const [email, setEmail] = useState();
     const [password, setPassword] = useState();
+    const {dispatch} = UseUserContext();
 
     const submitForSignup = async (e) => {
         //prevent the default form submit action of refreshing the page
@@ -20,8 +22,11 @@ const Signup = () => {
         const jsonResponse = await response.json();
 
         if (response.ok) {
-            //for now print our response to the console
-            console.log(jsonResponse);
+            //save the user's token to local storage
+            localStorage.setItem('user', JSON.stringify(jsonResponse));
+
+            //set the global context to be logged in
+            dispatch({type: "LOGIN", payload: jsonResponse});
         }
     }
 
