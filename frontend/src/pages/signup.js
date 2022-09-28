@@ -42,6 +42,7 @@ const Signup = () => {
 
     return (
         <form className="signup" onSubmit={submitForSignup}>
+            <h2>Signup</h2>
             <label>Email:</label>
             <input
             type="email"

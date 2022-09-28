@@ -42,6 +42,7 @@ const Login = () => {
 
     return (
         <form className="login" onSubmit={submitForLogin}>
+            <h2>Login</h2>
             <label>Email:</label>
             <input
             type="email"
