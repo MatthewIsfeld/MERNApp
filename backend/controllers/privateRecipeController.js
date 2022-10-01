@@ -1,4 +1,5 @@
-
+const mongoose = require('mongoose');
+const PrivateRecipe = require('../models/privateRecipeModel.js');
 
 const getAllPrivateRecipes = async (req, res) => {
     res.status(200).json({message: "This is get all recipes"}); 
@@ -10,7 +11,20 @@ const getOnePrivateRecipe = async (req, res) => {
 }
 
 const createPrivateRecipe = async (req, res) => {
-    res.status(200).json({message: "This is create one recipe"}); 
+    //check to make sure all fields are present
+    const {title, instructions, meal, ingredients} = req.body;
+
+    if (!title || !instructions || !meal || !ingredients) {
+        return res.status(400).json({error: "One of the fields is not filled in! All fields must be filled in!"});
+    }
+
+    try {
+        const userId = req.user._id;
+        const privateRecipe = await PrivateRecipe.create({userId, title, instructions, meal, ingredients});
+        res.status(200).json(privateRecipe);
+    } catch (error) {
+        res.status(400).json({error: error.message});
+    }
 }
 
 const deletePrivateRecipe = async (req, res) => {
