@@ -2,7 +2,15 @@ const mongoose = require('mongoose');
 const PrivateRecipe = require('../models/privateRecipeModel.js');
 
 const getAllPrivateRecipes = async (req, res) => {
-    res.status(200).json({message: "This is get all recipes"}); 
+    //get the user id
+    const userId = req.user._id;
+
+    try {
+        const privateRecipes = await PrivateRecipe.find({ userId }).sort({createdAt: -1});
+        res.status(200).json(privateRecipes);
+    } catch (error) {
+        res.status(400).json({error: error.message});
+    }
 }
 
 const getOnePrivateRecipe = async (req, res) => {

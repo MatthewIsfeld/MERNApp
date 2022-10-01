@@ -25,6 +25,6 @@ const privateRecipeSchema = new mongoose.Schema({
         of: Number,
         required: true
     }
-});
+}, {timestamps: true});
 
 module.exports = mongoose.model("PrivateRecipe", privateRecipeSchema);
