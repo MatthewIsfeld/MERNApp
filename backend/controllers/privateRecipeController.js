@@ -15,7 +15,30 @@ const getAllPrivateRecipes = async (req, res) => {
 
 const getOnePrivateRecipe = async (req, res) => {
     const {id} = req.params;
-    res.status(200).json({message: `This is get one recipe, to get ${id}`}); 
+    
+    //check if the user inputted a valid mongoDB id
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(400).json({error: "Invalid ID!"});   
+    }
+
+    //get user id from request
+    const userId = req.user._id;
+
+    try {
+        const recipe = await PrivateRecipe.findById(id);
+
+        if (!recipe) {
+            return res.status(200).json({message: "No recipe exists with this id"});
+        }
+        
+        if (!mongoose.Types.ObjectId(userId).equals(mongoose.Types.ObjectId(recipe.userId))) {
+            return res.status(400).json({message: "You must be logged in to the account that created this recipe to view it!"});
+        }
+
+        res.status(200).json(recipe);
+    } catch (error) {
+        res.status(400).json({error: error.message});       
+    }
 }
 
 const createPrivateRecipe = async (req, res) => {
