@@ -5,6 +5,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 //import our user router
 const userRouter = require('./routes/userRoutes.js');
+const privateRecipeRouter = require('./routes/privateRecipeRoutes.js');
 
 //create express app
 const app = express();
@@ -23,4 +24,6 @@ mongoose.connect(process.env.MONGO_URI)
 
 //user the user router to handle all routes related to the user
 app.use('/app/user', userRouter);
+
+app.use('/app/privateRecipes', privateRecipeRouter);
 

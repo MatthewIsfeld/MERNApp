@@ -8,7 +8,7 @@ const authorizationCheck = async (req, res, next) => {
 
     //if the user has not sent an authorization we should not continue, we return
     if (!authorization) {
-        res.status(401).json({error: "Must send authorization header in request"});
+        return res.status(401).json({error: "Must send authorization header in request"});
     }
 
     //if the user has sent an authorization header we need to get the token
@@ -19,10 +19,12 @@ const authorizationCheck = async (req, res, next) => {
         const {_id} = jwt.verify(token, process.env.SECRET);
 
         //search for the user and if they exist get just the user's id from the document and attach it to the request object
-        req.user = await User.findOne(_id).select('_id');
+        req.user = await User.findOne({_id}).select('_id');
         next();
     } catch (error) {
         //if any errors occur return the error
         res.status(401).json({error: error.message});
     }
 }
+
+module.exports = authorizationCheck;
