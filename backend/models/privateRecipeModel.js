@@ -1,9 +1,7 @@
 const mongoose = require('mongoose');
 
-const Schema = mongoose.Schema;
-
 //create a schema for a private recipe
-const privateRecipeSchema = new Schema({
+const privateRecipeSchema = new mongoose.Schema({
     userId: {
         type: String,
         required: true
@@ -23,7 +21,8 @@ const privateRecipeSchema = new Schema({
         required: true
     },
     ingredients: {
-        type: [String],
+        type: Map,
+        of: Number,
         required: true
     }
 });
