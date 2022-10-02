@@ -28,11 +28,11 @@ const getOnePrivateRecipe = async (req, res) => {
         const recipe = await PrivateRecipe.findById(id);
 
         if (!recipe) {
-            return res.status(200).json({message: "No recipe exists with this id"});
+            return res.status(400).json({error: "No recipe exists with this id"});
         }
         
         if (!mongoose.Types.ObjectId(userId).equals(mongoose.Types.ObjectId(recipe.userId))) {
-            return res.status(400).json({message: "You must be logged in to the account that created this recipe to view it!"});
+            return res.status(400).json({error: "You must be logged in to the account that created this recipe to view it!"});
         }
 
         res.status(200).json(recipe);
@@ -73,11 +73,11 @@ const deletePrivateRecipe = async (req, res) => {
         const recipe = await PrivateRecipe.findOneAndDelete({_id: id});
 
         if (!recipe) {
-            return res.status(200).json({message: "No recipe exists with this id"});
+            return res.status(400).json({error: "No recipe exists with this id"});
         }
         
         if (!mongoose.Types.ObjectId(userId).equals(mongoose.Types.ObjectId(recipe.userId))) {
-            return res.status(400).json({message: "You must be logged in to the account that created this recipe to delete it!"});
+            return res.status(400).json({error: "You must be logged in to the account that created this recipe to delete it!"});
         }
 
         res.status(200).json(recipe);
@@ -107,11 +107,11 @@ const updatePrivateRecipe = async (req, res) => {
         const recipe = await PrivateRecipe.findOneAndUpdate({_id: id}, {...req.body});
     
         if (!recipe) {
-            return res.status(200).json({message: "No recipe exists with this id"});
+            return res.status(400).json({error: "No recipe exists with this id"});
         }
             
         if (!mongoose.Types.ObjectId(reqUserId).equals(mongoose.Types.ObjectId(recipe.userId))) {
-            return res.status(400).json({message: "You must be logged in to the account that created this recipe to update it!"});
+            return res.status(400).json({error: "You must be logged in to the account that created this recipe to update it!"});
         }
     
         res.status(200).json(recipe);
