@@ -60,12 +60,64 @@ const createPrivateRecipe = async (req, res) => {
 
 const deletePrivateRecipe = async (req, res) => {
     const {id} = req.params;
-    res.status(200).json({message: `This is delete one recipe, to delete ${id}`}); 
+
+    //check if the user inputted a valid mongoDB id
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(400).json({error: "Invalid ID!"});   
+    }
+    
+    //get user id from request
+    const userId = req.user._id;
+
+    try {
+        const recipe = await PrivateRecipe.findOneAndDelete({_id: id});
+
+        if (!recipe) {
+            return res.status(200).json({message: "No recipe exists with this id"});
+        }
+        
+        if (!mongoose.Types.ObjectId(userId).equals(mongoose.Types.ObjectId(recipe.userId))) {
+            return res.status(400).json({message: "You must be logged in to the account that created this recipe to delete it!"});
+        }
+
+        res.status(200).json(recipe);
+    } catch (error) {
+        res.status(400).json({error: error.message});       
+    }
 }
 
 const updatePrivateRecipe = async (req, res) => {
     const {id} = req.params;
-    res.status(200).json({message: `This is update one recipe, to update ${id}`}); 
+
+    //check if the user inputted a valid mongoDB id
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(400).json({error: "Invalid ID!"});   
+    }
+        
+    //get user id from request
+    const reqUserId = req.user._id;
+
+    //check our request for fields that cannot be updated
+    const {_id, userId} = req.body;
+    if (_id || userId) {
+        return res.status(400).json({error: "Cannot update these properties!"});
+    }
+    
+    try {
+        const recipe = await PrivateRecipe.findOneAndUpdate({_id: id}, {...req.body});
+    
+        if (!recipe) {
+            return res.status(200).json({message: "No recipe exists with this id"});
+        }
+            
+        if (!mongoose.Types.ObjectId(reqUserId).equals(mongoose.Types.ObjectId(recipe.userId))) {
+            return res.status(400).json({message: "You must be logged in to the account that created this recipe to update it!"});
+        }
+    
+        res.status(200).json(recipe);
+    } catch (error) {
+        res.status(400).json({error: error.message});       
+    }
 }
 
 module.exports = {
