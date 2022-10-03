@@ -1,5 +1,6 @@
 import {UseUserContext} from '../hooks/useUserContext.js';
 import {useEffect, useState} from 'react';
+import SimpleRecipeDisplay from '../components/simpleRecipeDisplay.js';
 
 const Home = () => {
     const {user} = UseUserContext();
@@ -34,9 +35,14 @@ const Home = () => {
         }
     }, [user]);
 
+    //if we have recipes we use the .map() method to display each recipe
     return (
         <div className="home">
-            {recipes && <div>{recipes[0].title}</div>}
+            <div className="recipes">
+                { recipes && recipes.map((recipe) => (
+                    <SimpleRecipeDisplay key={recipe._id} recipe={recipe}></SimpleRecipeDisplay>
+                ))}
+            </div>
             {error && <div className="error">{error}</div>}
         </div>
     )
