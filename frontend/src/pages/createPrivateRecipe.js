@@ -86,6 +86,7 @@ const CreatePrivateRecipe = () => {
                         type="number"
                         value={item.amount}
                         onChange={(e) => handleAmountChange(e, index)}
+                        min="0"
                         >
                         </input>
                         {ingredients.length !== 1 && <button onClick={() => removeIngredientInput(index)}>Remove</button>}
