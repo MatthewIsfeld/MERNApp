@@ -103,12 +103,14 @@ const CreatePrivateRecipe = () => {
             {ingredients.map((item, index) => {
                 return (
                     <div className="ingredients" key={index}>
+                        <label>Ingredient Name:</label>
                         <input
                         type="text"
                         value={item.name}
                         onChange={(e) => handleNameChange(e, index)}
                         >
                         </input>
+                        <label>Ingredit Amount (g):</label>
                         <input
                         type="number"
                         value={item.amount}
