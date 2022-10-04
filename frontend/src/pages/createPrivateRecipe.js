@@ -8,6 +8,7 @@ const CreatePrivateRecipe = () => {
     const [meal, setMeal] = useState('any');
     //set our ingredients to a list of javascript objects containing the name of each ingredient and the amount in grams
     const [ingredients, setIngredients] = useState([{name: '', amount: 0}]);
+    const [error, setError] = useState(null);
 
     //This function will add more ingredient input fields at the user's request, it does this by updating the list of ingredients, which causes the page to re-run the .map in the jsx
     const addIngredientInput = () => {
@@ -37,7 +38,33 @@ const CreatePrivateRecipe = () => {
 
     const submitRecipe = async (e) => {
         e.preventDefault();
-        console.log(JSON.stringify({title, instructions, meal, ingredients}));
+        setError(null);
+        //Check to see if we are logged in
+        if (!user) {
+            setError('You must be logged in to submit a private recipe!');
+            return;
+        }
+
+        //send a post request to our backend api to create a new recipe
+        const response = await fetch('/app/privateRecipes/', {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${user.token}`
+            },
+            body: JSON.stringify({title, instructions, meal, ingredients})
+        })
+        const jsonResponse = await response.json();
+
+        if (response.ok) {
+            setError(null);
+            setTitle('');
+            setMeal('any');
+            setInstructions('');
+            setIngredients([{name: '', amount: 0}]);
+        } else {
+            setError(jsonResponse.error);
+        }
     }
 
     return (
@@ -97,6 +124,7 @@ const CreatePrivateRecipe = () => {
 
             <div>{JSON.stringify(ingredients)}</div>
             <button>Submit</button>
+            {error && <div>{error}</div>}
         </form>
     )
 }

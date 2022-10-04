@@ -1,5 +1,17 @@
 const mongoose = require('mongoose');
 
+//create a variable to store our ingredient
+const ingredientSchema = new mongoose.Schema({
+    name: {
+        type: String,
+        required: true
+    },
+    amount: {
+        type: Number,
+        required: true
+    }
+}, {_id: false});
+
 //create a schema for a private recipe
 const privateRecipeSchema = new mongoose.Schema({
     userId: {
@@ -21,8 +33,7 @@ const privateRecipeSchema = new mongoose.Schema({
         required: true
     },
     ingredients: {
-        type: Map,
-        of: Number,
+        type: [ingredientSchema],
         required: true
     }
 }, {timestamps: true});
