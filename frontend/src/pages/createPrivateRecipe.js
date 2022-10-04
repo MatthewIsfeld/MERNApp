@@ -122,9 +122,8 @@ const CreatePrivateRecipe = () => {
                 )
             })}
 
-            <div>{JSON.stringify(ingredients)}</div>
             <button>Submit</button>
-            {error && <div>{error}</div>}
+            {error && <div className="error">{error}</div>}
         </form>
     )
 }

@@ -14,11 +14,11 @@ function App() {
     <TopBar></TopBar>
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Home></Home>}>
+        <Route path="/" element={user ? <Home></Home> : <Navigate to="/login"></Navigate>}>
         </Route>
-        <Route path="/login" element={!user && <Login></Login>}>
+        <Route path="/login" element={!user ? <Login></Login> : <Navigate to="/"></Navigate>}>
         </Route>
-        <Route path="/signup" element={!user && <Signup></Signup>}>
+        <Route path="/signup" element={!user ? <Signup></Signup> : <Navigate to="/"></Navigate>}>
         </Route>
         <Route path="/createPrivate" element={<CreatePrivateRecipe></CreatePrivateRecipe>}>
         </Route>
