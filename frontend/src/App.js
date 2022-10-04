@@ -11,8 +11,8 @@ function App() {
 
   return (
   <div className="app">
-    <TopBar></TopBar>
     <BrowserRouter>
+    <TopBar></TopBar>
       <Routes>
         <Route path="/" element={user ? <Home></Home> : <Navigate to="/login"></Navigate>}>
         </Route>
@@ -20,7 +20,7 @@ function App() {
         </Route>
         <Route path="/signup" element={!user ? <Signup></Signup> : <Navigate to="/"></Navigate>}>
         </Route>
-        <Route path="/createPrivate" element={<CreatePrivateRecipe></CreatePrivateRecipe>}>
+        <Route path="/createPrivate" element={user ? <CreatePrivateRecipe></CreatePrivateRecipe> : <Navigate to="/login"></Navigate>}>
         </Route>
       </Routes>
     </BrowserRouter>
