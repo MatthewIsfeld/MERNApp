@@ -1,3 +1,4 @@
+import {Link} from 'react-router-dom';
 
 const SimpleRecipeDisplay = ({ recipe }) => {
     return (
@@ -5,6 +6,7 @@ const SimpleRecipeDisplay = ({ recipe }) => {
             <h4>{recipe.title}</h4>
             <p>{recipe.meal}</p>
             <p>{recipe.createdAt}</p>
+            <Link to="/recipe/view" state={{recipe}}>View</Link>
         </div>
     )
 }

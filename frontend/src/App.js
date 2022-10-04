@@ -5,6 +5,7 @@ import Home from './pages/home.js';
 import {UseUserContext} from './hooks/useUserContext.js';
 import TopBar from './components/topBar.js';
 import CreatePrivateRecipe from './pages/createPrivateRecipe.js';
+import DetailedRecipeDisplay from './pages/detailedRecipeDisplay.js';
 
 function App() {
   const {user} = UseUserContext();
@@ -21,6 +22,8 @@ function App() {
         <Route path="/signup" element={!user ? <Signup></Signup> : <Navigate to="/"></Navigate>}>
         </Route>
         <Route path="/createPrivate" element={user ? <CreatePrivateRecipe></CreatePrivateRecipe> : <Navigate to="/login"></Navigate>}>
+        </Route>
+        <Route path="/recipe/view" element={user ? <DetailedRecipeDisplay></DetailedRecipeDisplay>: <Navigate to="/login"></Navigate>}>
         </Route>
       </Routes>
     </BrowserRouter>

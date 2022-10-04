@@ -23,7 +23,6 @@ const Home = () => {
             if (response.ok) {
                 setError(null);
                 setRecipes(returnedJson);
-                console.log("%j", returnedJson);
             } else {
                 //if the response is not ok show an error
                 setError(returnedJson.error);
