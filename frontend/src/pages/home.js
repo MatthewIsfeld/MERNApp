@@ -6,12 +6,24 @@ const Home = () => {
     const {user} = UseUserContext();
     const [error, setError] = useState();
     const [recipes, setRecipes] = useState();
+    const [page, setPage] = useState(0);
+
+    const incrementPage = () => {
+        setPage(page + 1);
+    }
+
+    
+    const decrementPage = () => {
+        if (page > 0) {
+            setPage(page - 1);
+        }
+    }
 
     useEffect(() => {
         const getAllRecipes = async () => {
             setError(null);
             //default fetch is a GET request so we do not need to specify method
-            const response = await fetch('/app/privateRecipes', {
+            const response = await fetch(`/app/privateRecipes?p=${page}`, {
                 headers: {
                     Authorization: `Bearer ${user.token}`
                 }
@@ -32,7 +44,7 @@ const Home = () => {
         if (user) {
             getAllRecipes();
         }
-    }, [user]);
+    }, [user, page]);
 
     //if we have recipes we use the .map() method to display each recipe
     return (
@@ -41,6 +53,20 @@ const Home = () => {
                 { recipes && recipes.map((recipe) => (
                     <SimpleRecipeDisplay key={recipe._id} recipe={recipe}></SimpleRecipeDisplay>
                 ))}
+            </div>
+            <div className = "page-buttons">
+                <button onClick={decrementPage}>Previous Page</button>
+                <button onClick={incrementPage}>Next Page</button>
+            </div>
+            <div className = "page-form">
+                <form>
+                    <input
+                    type="Number"
+                    value={page}
+                    onChange={(e) => {setPage(e.target.value)}}
+                    min="0">
+                    </input>
+                </form>
             </div>
             {error && <div className="error">{error}</div>}
         </div>
