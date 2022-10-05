@@ -47,6 +47,11 @@ const DetailedRecipeDisplay = () => {
 
     //we use a useEffect function to handle the case where a user tries to enter this url directly, we also use this to set default values for updating
     useEffect(() => {
+        if (!recipe) {
+            navigate('/');
+            return;
+        }
+        
         setTitle(recipe.title);
         setInstructions(recipe.instructions);
         setMeal(recipe.meal);
@@ -57,10 +62,6 @@ const DetailedRecipeDisplay = () => {
             return true;
         });
         setIngredients(tempIngredients);
-
-        if (!recipe) {
-            navigate('/');
-        }
     }, [recipe, navigate]);
 
     //Functions for updating a recipe
