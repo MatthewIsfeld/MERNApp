@@ -41,7 +41,9 @@ const DetailedRecipeDisplay = () => {
         <div className="detailed-recipe">
             <h3>{recipe.title}</h3>
             <p>Meal: {recipe.meal}</p>
-            <article>{recipe.instructions}</article>
+            <article>
+                {recipe.instructions}
+            </article>
             <div className="ingredients-display">
                 {recipe.ingredients.map((ingredient, index) => (
                     <div className="ingredient" key={index}>

@@ -67,3 +67,7 @@ form.login, form.signup {
   left: 0;
   right: 0;
 }
+
+.detailed-recipe article {
+  white-space: pre-line;
+}
