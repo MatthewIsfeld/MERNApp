@@ -3,15 +3,14 @@ const PrivateRecipe = require('../models/privateRecipeModel.js');
 
 const getAllPrivateRecipes = async (req, res) => {
     //get the user id
-    const userId = req.user._id;
-    //get the page from the user via a query
-    const page = req.query.p || 0;
-
-
+    const reqUserId = req.user._id;
+    let findCriteria = {userId: reqUserId, meal: null};
+    if (req.query.m) {
+        findCriteria.meal = req.query.m;
+    }
+    console.log(findCriteria);
     try {
-        const privateRecipes = await PrivateRecipe.find({ userId }).sort({createdAt: -1})
-            .skip(page * 10)
-            .limit(10);
+        const privateRecipes = await PrivateRecipe.find(findCriteria).sort({createdAt: -1});
         res.status(200).json(privateRecipes);
     } catch (error) {
         res.status(400).json({error: error.message});

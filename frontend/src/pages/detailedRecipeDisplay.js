@@ -186,7 +186,7 @@ const DetailedRecipeDisplay = () => {
                                 onChange={(e) => handleNameChange(e, index)}
                                 >
                                 </input>
-                                <label>Ingredit Amount (g):</label>
+                                <label>Ingredient Amount (g):</label>
                                 <input
                                 type="number"
                                 value={item.amount}

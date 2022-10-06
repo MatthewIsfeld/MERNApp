@@ -7,6 +7,7 @@ const Home = () => {
     const [error, setError] = useState();
     const [recipes, setRecipes] = useState();
     const [page, setPage] = useState(0);
+    const [meal, setMeal] = useState('any');
 
     const incrementPage = () => {
         setPage(page + 1);
@@ -23,10 +24,10 @@ const Home = () => {
         const getAllRecipes = async () => {
             setError(null);
             //default fetch is a GET request so we do not need to specify method
-            const response = await fetch(`/app/privateRecipes?p=${page}`, {
+            const response = await fetch(`/app/privateRecipes?m=${meal}`, {
                 headers: {
-                    Authorization: `Bearer ${user.token}`
-                }
+                    Authorization: `Bearer ${user.token}`,
+                },
             });
             //convert our response into json
             const returnedJson = await response.json();
@@ -44,11 +45,29 @@ const Home = () => {
         if (user) {
             getAllRecipes();
         }
-    }, [user, page]);
+    }, [user, meal]);
 
     //if we have recipes we use the .map() method to display each recipe
     return (
         <div className="home">
+            <div className="sort-form">
+                <form>
+                <label>Meal:</label>
+                        <select
+                        value={meal}
+                        onChange={(e) => {setMeal(e.target.value)}}
+                        >
+                        <option value="breakfast">Breakfast</option>
+                        <option value="lunch">Lunch</option>
+                        <option value="dinner">Dinner</option>
+                        <option value="breakfast/lunch">Breakfast/Lunch</option>
+                        <option value="lunch/dinner">Lunch/dinner</option>
+                        <option value="dessert">Dessert</option>
+                        <option value="snack">Snack</option>
+                        <option value="any">Any</option>
+                    </select>
+                </form>
+            </div>
             <div className="recipes">
                 { recipes && recipes.map((recipe) => (
                     <SimpleRecipeDisplay key={recipe._id} recipe={recipe}></SimpleRecipeDisplay>
