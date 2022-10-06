@@ -8,7 +8,6 @@ const getAllPrivateRecipes = async (req, res) => {
     if (req.query.m) {
         findCriteria.meal = req.query.m;
     }
-    console.log(findCriteria);
     try {
         const privateRecipes = await PrivateRecipe.find(findCriteria).sort({createdAt: -1});
         res.status(200).json(privateRecipes);
