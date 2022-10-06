@@ -69,7 +69,7 @@ const Home = () => {
                 </form>
             </div>
             <div className="recipes">
-                { recipes && recipes.map((recipe) => (
+                { recipes && recipes.slice(page*6, page*6+6).map((recipe) => (
                     <SimpleRecipeDisplay key={recipe._id} recipe={recipe}></SimpleRecipeDisplay>
                 ))}
             </div>
