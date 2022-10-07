@@ -20,12 +20,12 @@ code {
   margin-right: 2px;
 }
 
-.create-private-recipe textarea {
+.create-private-recipe textarea{
   width: 100%;
   margin-bottom: 10px;
 }
 
-.create-private-recipe select {
+.create-private-recipe select, .update-private-recipe select {
   display: inline;
   margin-left: 3px;
 }
@@ -36,11 +36,11 @@ code {
   margin-bottom: 10px;
 }
 
-.create-private-recipe div.ingredients label{
+.create-private-recipe div.ingredients label, .update-private-recipe div.ingredients label{
   display: inline;
 }
 
-.create-private-recipe label.meal-label {
+.create-private-recipe label.meal-label, .update-private-recipe label.meal-label{
   display: inline;
 }
 
@@ -134,4 +134,80 @@ nav {
 div.home {
   text-align: center;
   align-items: center;
+}
+
+div.sort-form {
+  width: 90%;
+  margin-top: 20px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: right;
+}
+
+.home button {
+  border-radius: 4px;
+  border: 0;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  margin-left: 20px;
+  margin-top: 10px;
+}
+
+.home input {
+  border-radius: 4px;
+  border: 1px solid lightgray;
+  margin-top: 10px;
+}
+
+.simple-recipe {
+  border-radius: 10px;
+  border: 1px solid rgb(243, 238, 238);
+  background: rgb(243, 238, 238);
+  margin-top: 10px;
+  margin-bottom: 10px;
+  margin-right: auto;
+  margin-left: auto;
+  width: 20%;
+}
+
+.detailed-recipe-page {
+  align-items: center;
+  text-align: center;
+  display: grid;
+  grid-template-columns: 2fr 2fr;
+  gap: 100px;
+}
+
+.detailed-recipe button {
+  border-radius: 4px;
+  border: 0;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.update-private-recipe input {
+  border-radius: 4px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border: 1px solid lightgray;
+  margin-left: 3px;
+  margin-right: 3px;
+}
+
+.update-private-recipe label {
+  display: block;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.update-private-recipe textarea {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 10px;
+  width: 30%;
 }

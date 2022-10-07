@@ -128,11 +128,13 @@ const DetailedRecipeDisplay = () => {
     return (
         <div className="detailed-recipe-page">
             <div className="detailed-recipe">
-                <h3>{recipe.title}</h3>
+                <h2>{recipe.title}</h2>
                 <p>Meal: {recipe.meal}</p>
+                <h4>Instructions</h4>
                 <article>
                     {recipe.instructions}
                 </article>
+                <h4>Ingredients</h4>
                 <div className="ingredients-display">
                     {recipe.ingredients.map((ingredient, index) => (
                         <div className="ingredient" key={`displayIngredient${index}`}>
