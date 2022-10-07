@@ -13,21 +13,23 @@ function App() {
   return (
   <div className="app">
     <BrowserRouter>
-    <TopBar></TopBar>
-      <Routes>
-        <Route path="/" element={user ? <Home></Home> : <Navigate to="/login"></Navigate>}>
-        </Route>
-        <Route path="/login" element={!user ? <Login></Login> : <Navigate to="/"></Navigate>}>
-        </Route>
-        <Route path="/signup" element={!user ? <Signup></Signup> : <Navigate to="/"></Navigate>}>
-        </Route>
-        <Route path="/createPrivate" element={user ? <CreatePrivateRecipe></CreatePrivateRecipe> : <Navigate to="/login"></Navigate>}>
-        </Route>
-        <Route path="/recipe/view" element={user ? <DetailedRecipeDisplay></DetailedRecipeDisplay>: <Navigate to="/login"></Navigate>}>
-        </Route>
-      </Routes>
+      <TopBar></TopBar>
+        <div className='page-content'>
+          <Routes>
+            <Route path="/" element={user ? <Home></Home> : <Navigate to="/login"></Navigate>}>
+            </Route>
+            <Route path="/login" element={!user ? <Login></Login> : <Navigate to="/"></Navigate>}>
+            </Route>
+            <Route path="/signup" element={!user ? <Signup></Signup> : <Navigate to="/"></Navigate>}>
+            </Route>
+            <Route path="/createPrivate" element={user ? <CreatePrivateRecipe></CreatePrivateRecipe> : <Navigate to="/login"></Navigate>}>
+            </Route>
+            <Route path="/recipe/view" element={user ? <DetailedRecipeDisplay></DetailedRecipeDisplay>: <Navigate to="/login"></Navigate>}>
+            </Route>
+          </Routes>
+        </div>
     </BrowserRouter>
-    </div>
+  </div>
   );
 }
 

@@ -84,7 +84,7 @@ const CreatePrivateRecipe = () => {
             onChange={(e) => {setInstructions(e.target.value)}}>
             </textarea>
 
-            <label>Meal:</label>
+            <label className="meal-label">Meal:</label>
             <select
             value={meal}
             onChange={(e) => {setMeal(e.target.value)}}

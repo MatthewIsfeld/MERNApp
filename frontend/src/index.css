@@ -4,7 +4,7 @@ code {
     monospace;
 }
 
-.login input, .signup input{
+.login input, .signup input, .create-private-recipe input {
   display: block;
   border-radius: 4px;
   margin-top: 10px;
@@ -13,10 +13,35 @@ code {
   width: 100%;
 }
 
-.login label, .signup label {
+.create-private-recipe div.ingredients input{
+  width: 20%;
+  display: inline;
+  margin-left: 2px;
+  margin-right: 2px;
+}
+
+.create-private-recipe textarea {
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.create-private-recipe select {
+  display: inline;
+  margin-left: 3px;
+}
+
+.login label, .signup label, .create-private-recipe label {
   display: block;
   margin-top: 10px;
   margin-bottom: 10px;
+}
+
+.create-private-recipe div.ingredients label{
+  display: inline;
+}
+
+.create-private-recipe label.meal-label {
+  display: inline;
 }
 
 .login button, .signup button {
@@ -29,24 +54,36 @@ code {
   padding-bottom: 5px;
 }
 
-form.login, form.signup {
+.create-private-recipe button, .update-private-recipe button {
+  border-radius: 4px;
+  border: 0;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.ingredients button {
+  margin: 3px;
+}
+
+form.login, form.signup, form.create-private-recipe {
   position: relative;
-  top: 40%;
-  transform: translateY(-50%);
-  display: inline-block;
   margin: auto;
   max-width: 35%;
   padding: 10px;
   display: block;
+  top: 40%;
+  transform: translateY(-50%);
 }
 
-.login h2, .signup h2 {
+.login h2, .signup h2, .create-private-recipe h2 {
   text-align: center;
   background-color: lightgray;
   border-radius: 4px;
 }
 
-.login div.error, .signup div.error {
+.error {
   border: 1px solid red;
   color: red;
   border-radius: 4px;
@@ -57,17 +94,44 @@ form.login, form.signup {
   padding-bottom: 10px;
 }
 
-.app {
+.page-content {
   position:absolute;
-  width: 100vw;
-  height:100vh;
-  background: rgb(245, 243, 243);
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
+  width: 100%;
+  height: 100%;
 }
 
 .detailed-recipe article {
   white-space: pre-line;
+}
+
+.top-bar {
+  width: 100%;
+  height: 15%;
+}
+
+nav {
+  text-align: center;
+}
+
+.top-bar a {
+  padding: 5px;
+  background: rgb(243, 237, 237);
+  margin-left: 20px;
+  margin-right: 20px;
+  border-radius: 4px;
+}
+
+.top-bar button {
+  border-radius: 4px;
+  border: 0;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  margin-left: 20px;
+}
+
+div.home {
+  text-align: center;
+  align-items: center;
 }

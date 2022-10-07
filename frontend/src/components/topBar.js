@@ -9,13 +9,15 @@ const TopBar = () => {
     }
 
     return (
-        <div className='top-bar'>
-            <Link to="/">Home</Link>
-            <Link to="/login">Login</Link>
-            <Link to="/signup">Signup</Link>
-            <Link to="/createPrivate">Add New Private Recipe</Link>
-            <button onClick={clickHandler}>Logout</button>
-        </div>
+        <header className='top-bar'>
+            <nav>
+                <Link to="/">Home</Link>
+                <Link to="/login">Login</Link>
+                <Link to="/signup">Signup</Link>
+                <Link to="/createPrivate">Add New Private Recipe</Link>
+                <button onClick={clickHandler}>Logout</button>
+            </nav>
+        </header>
     )
 }
 
