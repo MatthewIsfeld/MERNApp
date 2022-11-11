@@ -7,12 +7,12 @@ const CreatePrivateRecipe = () => {
     const [instructions, setInstructions] = useState('');
     const [meal, setMeal] = useState('any');
     //set our ingredients to a list of javascript objects containing the name of each ingredient and the amount in grams
-    const [ingredients, setIngredients] = useState([{name: '', amount: 0}]);
+    const [ingredients, setIngredients] = useState([{name: '', amount: ''}]);
     const [error, setError] = useState(null);
 
     //This function will add more ingredient input fields at the user's request, it does this by updating the list of ingredients, which causes the page to re-run the .map in the jsx
     const addIngredientInput = () => {
-        setIngredients([...ingredients, {name: "", amount: 0}]);
+        setIngredients([...ingredients, {name: "", amount: ''}]);
     }
 
     //remove an ingredient in a similar way to how we add it
@@ -110,12 +110,11 @@ const CreatePrivateRecipe = () => {
                         onChange={(e) => handleNameChange(e, index)}
                         >
                         </input>
-                        <label>Ingredient Amount (g):</label>
+                        <label>Ingredient Amount:</label>
                         <input
-                        type="number"
+                        type="text"
                         value={item.amount}
                         onChange={(e) => handleAmountChange(e, index)}
-                        min="0"
                         >
                         </input>
                         {ingredients.length !== 1 && <button onClick={() => removeIngredientInput(index)}>Remove</button>}

@@ -15,7 +15,7 @@ const DetailedRecipeDisplay = () => {
     const [title, setTitle] = useState('');
     const [instructions, setInstructions] = useState('');
     const [meal, setMeal] = useState('any');
-    const [ingredients, setIngredients] = useState([{name: '', amount: 0}]);
+    const [ingredients, setIngredients] = useState([{name: '', amount: ''}]);
 
     //This functions handles deleting a recipe
     const handleDelete = async () => {
@@ -68,7 +68,7 @@ const DetailedRecipeDisplay = () => {
     
     //This function will add more ingredient input fields at the user's request, it does this by updating the list of ingredients, which causes the page to re-run the .map in the jsx
     const addIngredientInput = () => {
-        setIngredients([...ingredients, {name: "", amount: 0}]);
+        setIngredients([...ingredients, {name: "", amount: ''}]);
     }
     
     //remove an ingredient in a similar way to how we add it
@@ -138,7 +138,7 @@ const DetailedRecipeDisplay = () => {
                 <div className="ingredients-display">
                     {recipe.ingredients.map((ingredient, index) => (
                         <div className="ingredient" key={`displayIngredient${index}`}>
-                            <p>{ingredient.name}: {ingredient.amount}g</p>
+                            <p>{ingredient.name}: {ingredient.amount}</p>
                         </div>
                     ))}
                 </div>
@@ -188,12 +188,11 @@ const DetailedRecipeDisplay = () => {
                                 onChange={(e) => handleNameChange(e, index)}
                                 >
                                 </input>
-                                <label>Ingredient Amount (g):</label>
+                                <label>Ingredient Amount:</label>
                                 <input
-                                type="number"
+                                type="text"
                                 value={item.amount}
                                 onChange={(e) => handleAmountChange(e, index)}
-                                min="0"
                                 >
                                 </input>
                                 {ingredients.length !== 1 && <button onClick={() => removeIngredientInput(index)}>Remove</button>}
