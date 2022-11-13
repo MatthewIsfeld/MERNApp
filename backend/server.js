@@ -14,7 +14,7 @@ const app = express();
 app.use(express.json());
 
 //connect to the database
-mongoose.connect(process.env.MONGO_URI)
+mongoose.connect(process.env.MONGODB_URI)
     .then(() => {
         //listen to a port, we only want to listen to a port once we are connected to the database
         app.listen(process.env.PORT, () => {
