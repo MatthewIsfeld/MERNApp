@@ -1,5 +1,6 @@
 import {UseUserContext} from '../hooks/useUserContext.js';
 import {useState} from 'react';
+import {useNavigate} from 'react-router-dom';
 
 const CreatePrivateRecipe = () => {
     const {user} = UseUserContext();
@@ -9,6 +10,7 @@ const CreatePrivateRecipe = () => {
     //set our ingredients to a list of javascript objects containing the name of each ingredient and the amount in grams
     const [ingredients, setIngredients] = useState([{name: '', amount: ''}]);
     const [error, setError] = useState(null);
+    const navigator = useNavigate();
 
     //This function will add more ingredient input fields at the user's request, it does this by updating the list of ingredients, which causes the page to re-run the .map in the jsx
     const addIngredientInput = () => {
@@ -62,6 +64,7 @@ const CreatePrivateRecipe = () => {
             setMeal('any');
             setInstructions('');
             setIngredients([{name: '', amount: 0}]);
+            navigator("/");
         } else {
             setError(jsonResponse.error);
         }
